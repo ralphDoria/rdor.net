@@ -1,22 +1,203 @@
 <!DOCTYPE html>
+<!--
+   ____  ____   ___  ____   _ __   ___ _____
+  |  _ \|  _ \ / _ \|  _ \ | '_ \ / _ \_   _|
+  | |_) | | | | | | | |_) || | | |  __/ | |
+  |  _ <| |_| | |_| |  _ < |_| |_|\___| |_|
+  |_| \_\____/ \___/|_| \_\
+
+  rdor.net // hand-coded, no frameworks, no cookies (well, one — the hit counter)
+  if you're reading this: hi. the source is the site.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rdor</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=820">
+    <meta name="description" content="rdor.net - personal HQ. AI/ML, DevOps, Neurotech, Product. Summer '26.">
+    <meta name="keywords" content="rdor, AI, ML, devops, neurotech, hackathon, personal homepage, webring">
+    <title>rdor.net :: HQ</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>rdor</h1>
-    <h2>Summer '26</h2>
-    <h3>Manifesto</h3>
-    <p>AI/ML, DevOps, Neurotech, Product Management.</p>
-    <h3>Project Roadmap</h3>
-    <ol>
-    </ol>
-    <h3>Projects</h3>
-    <ol>
-        <li>ScheduleBob (6 users)</li>
-        <li>Metis (HackDavis) (Won MLH Best Use of Vultr)</li>
-    </ol>
+<div class="frame">
+
+    <!-- ===================== BANNER ===================== -->
+    <div class="banner">
+        <h1 class="logo">rdor<span class="dot">.</span>net</h1>
+        <p class="tagline">~ a small corner of the web, run by hand since AD MMXXVI ~</p>
+    </div>
+
+    <!-- ===================== TICKER ===================== -->
+    <div class="ticker">
+        <marquee scrollamount="4" behavior="scroll" direction="left">
+            *** WELCOME TO RDOR.NET *** you are visitor number
+            <span id="tickcount">000000</span> ***
+            ScheduleBob just crossed 6 users (!!) ***
+            Metis took MLH Best Use of Vultr @ HackDavis ***
+            sign the guestbook before you leave ***
+            this site looks best with the lights off ***
+        </marquee>
+    </div>
+
+    <!-- ===================== LAYOUT ===================== -->
+    <table class="layout"><tbody><tr>
+
+    <!-- --------------- SIDEBAR --------------- -->
+    <td class="sidebar">
+        <a class="navbtn here" href="index.html">&#9632; HOME</a>
+        <a class="navbtn" href="about.html">&#9632; ABOUT ME</a>
+        <a class="navbtn" href="projects.html">&#9632; PROJECTS</a>
+        <a class="navbtn" href="links.html">&#9632; COOL LINKS</a>
+        <a class="navbtn" href="guestbook.html">&#9632; GUESTBOOK</a>
+
+        <div class="panel">
+            <h3>:: Visitors ::</h3>
+            <div class="pbody" style="text-align:center;">
+                <div class="counter" id="hitcounter">000000</div>
+                <div class="small">since 06/2026</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>:: Status ::</h3>
+            <div class="pbody small">
+                <span class="status-on">&#9679;</span> <b class="green">ONLINE</b><br>
+                Mood: shipping<br>
+                Caffeine: <span class="amber">CRITICAL</span><br>
+                <span id="localtime">--:--:--</span> local
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>:: Now Playing ::</h3>
+            <div class="pbody">
+                <div class="nowplaying">
+                    &#9835; loading...<br>
+                    <marquee scrollamount="3">[ Boards of Canada - Roygbiv ]</marquee>
+                    <span class="small">[||||||----] 4:01</span>
+                </div>
+            </div>
+        </div>
+    </td>
+
+    <!-- --------------- CONTENT --------------- -->
+    <td class="content">
+
+        <div class="construction">
+            <span>&#9888; UNDER CONSTRUCTION &#9888;</span>
+        </div>
+        <br>
+
+        <h2>Welcome, traveler. <span class="blink pink">_</span></h2>
+        <p class="subhead">Summer '26 edition &middot; updated 06/12/2026</p>
+
+        <p>
+            You've reached <b class="amber">rdor.net</b> &mdash; my own slice of server,
+            no algorithm, no feed, no infinite scroll. Just a person who builds things.
+            Grab a drink, poke around, and <a href="guestbook.html">sign the book</a>
+            on your way out. <span class="new">NEW</span>
+        </p>
+
+        <div class="panel">
+            <h3>:: The Manifesto ::</h3>
+            <div class="pbody">
+                <p style="margin:0;">
+                    I build at the intersection of
+                    <b class="green">AI/ML</b>,
+                    <b class="green">DevOps</b>,
+                    <b class="green">Neurotech</b>, and
+                    <b class="green">Product Management</b>.
+                    Make the useful thing, ship it to real people, learn out loud,
+                    repeat. <a href="about.html">Read the long version &raquo;</a>
+                </p>
+            </div>
+        </div>
+
+        <hr class="fancy">
+
+        <h4>&#9656; Site Updates</h4>
+
+        <div class="newsitem">
+            <span class="newsdate">[06.12.2026]</span> &mdash; New site goes live! Rebuilt
+            from scratch the way the web was meant to be. Tables. Marquees. Vibes.
+            <span class="new">NEW</span>
+        </div>
+        <div class="newsitem">
+            <span class="newsdate">[06.05.2026]</span> &mdash;
+            <a href="projects.html"><b>ScheduleBob</b></a> hit <b class="amber">6 users</b>.
+            We're basically a unicorn now. Onboarding the 7th as we speak.
+        </div>
+        <div class="newsitem">
+            <span class="newsdate">[04.2026]</span> &mdash;
+            <a href="projects.html"><b>Metis</b></a> won
+            <b class="green">MLH Best Use of Vultr</b> at HackDavis. Demo gods were kind.
+        </div>
+        <div class="newsitem">
+            <span class="newsdate">[--.----]</span> &mdash;
+            <span class="small">older entries lost to a hard drive that did not survive. RIP.</span>
+        </div>
+
+        <hr class="fancy">
+
+        <table width="100%"><tbody><tr>
+        <td width="50%" valign="top">
+            <div class="panel">
+                <h3>:: Quick Stats ::</h3>
+                <div class="pbody small">
+                    Projects shipped: <b class="amber">2</b><br>
+                    Total users served: <b class="amber">6</b><br>
+                    Hackathon W's: <b class="amber">1</b><br>
+                    Frameworks used here: <b class="green">0</b><br>
+                    Cookies set: <b class="green">1</b> (the counter)
+                </div>
+            </div>
+        </td>
+        <td width="50%" valign="top">
+            <div class="panel">
+                <h3>:: Webring ::</h3>
+                <div class="pbody" style="text-align:center;">
+                    <span class="small">The Builders' Webring</span><br>
+                    <a href="#">&laquo; prev</a> &nbsp;|&nbsp;
+                    <a href="#">rand</a> &nbsp;|&nbsp;
+                    <a href="#">next &raquo;</a>
+                </div>
+            </div>
+        </td>
+        </tr></tbody></table>
+
+        <div class="webring">
+            <b class="amber">&#9733; Pick a poison &#9733;</b><br><br>
+            <a class="btn88 b-green" href="projects.html"><b>SCHEDULE</b>BOB v1.0</a>
+            <a class="btn88 b-pink" href="projects.html"><b>METIS</b><br>award winning</a>
+            <a class="btn88 b-blue" href="about.html">who is<br><b>rdor?</b></a>
+            <a class="btn88 b-gold" href="guestbook.html"><b>SIGN</b><br>guestbook!</a>
+        </div>
+
+    </td>
+    </tr></tbody></table>
+
+    <!-- ===================== FOOTER ===================== -->
+    <div class="footer">
+        <div class="badges">
+            <a class="btn88 b-grey" href="#">made in<br><b>NOTEPAD</b></a>
+            <a class="btn88 b-blue" href="#"><b>HTML 4</b><br>powered</a>
+            <a class="btn88 b-red" href="#">NO<br><b>JAVASCRI*</b></a>
+            <a class="btn88 b-cyan" href="#"><b>800x600</b><br>or bust</a>
+            <a class="btn88 b-green" href="#"><b>VALID</b><br>vibes only</a>
+        </div>
+        <div>
+            best viewed @ 1024&times;768 &middot; this site is 100&#37; powered by spite and curiosity<br>
+            &copy; 2026 rdor &middot; no rights reserved, take what you need &middot;
+            <a href="mailto:rpatdoria@gmail.com">webmaster@rdor.net</a>
+        </div>
+        <div class="small" style="margin-top:6px;">
+            * ok there's a little javascript. it's just the clock and the counter. relax.
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

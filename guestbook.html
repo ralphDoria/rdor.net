@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=820">
+    <title>rdor.net :: guestbook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+
+    <div class="banner">
+        <h1 class="logo">rdor<span class="dot">.</span>net</h1>
+        <p class="tagline">~ a small corner of the web, run by hand since AD MMXXVI ~</p>
+    </div>
+
+    <div class="ticker">
+        <marquee scrollamount="4" direction="left">
+            *** SIGN THE GUESTBOOK *** no entry is too small *** be nice ***
+            tell me you were here ***
+        </marquee>
+    </div>
+
+    <table class="layout"><tbody><tr>
+
+    <td class="sidebar">
+        <a class="navbtn" href="index.html">&#9632; HOME</a>
+        <a class="navbtn" href="about.html">&#9632; ABOUT ME</a>
+        <a class="navbtn" href="projects.html">&#9632; PROJECTS</a>
+        <a class="navbtn" href="links.html">&#9632; COOL LINKS</a>
+        <a class="navbtn here" href="guestbook.html">&#9632; GUESTBOOK</a>
+
+        <div class="panel">
+            <h3>:: Visitors ::</h3>
+            <div class="pbody" style="text-align:center;">
+                <div class="counter" id="hitcounter">000000</div>
+                <div class="small">since 06/2026</div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>:: Status ::</h3>
+            <div class="pbody small">
+                <span class="status-on">&#9679;</span> <b class="green">ONLINE</b><br>
+                Mood: reading entries<br>
+                Caffeine: <span class="amber">CRITICAL</span><br>
+                <span id="localtime">--:--:--</span> local
+            </div>
+        </div>
+
+        <div class="panel">
+            <h3>:: House Rules ::</h3>
+            <div class="pbody small">
+                &#9656; be kind<br>
+                &#9656; no spam<br>
+                &#9656; no &lt;blink&gt; wars<br>
+                &#9656; have fun
+            </div>
+        </div>
+    </td>
+
+    <td class="content">
+
+        <h2>Sign My Guestbook!</h2>
+        <p class="subhead">leave your mark &middot; this is what the web was for</p>
+
+        <div class="panel">
+            <h3>:: New Entry ::</h3>
+            <div class="pbody">
+                <form id="gbform" onsubmit="return false;">
+                    <table>
+                        <tr>
+                            <td class="small" align="right">Name / Handle:&nbsp;</td>
+                            <td><input class="retro" id="gbname" maxlength="32" size="28" placeholder="xX_handle_Xx"></td>
+                        </tr>
+                        <tr>
+                            <td class="small" align="right">Homepage (opt):&nbsp;</td>
+                            <td><input class="retro" id="gbsite" maxlength="80" size="28" placeholder="http://"></td>
+                        </tr>
+                        <tr>
+                            <td class="small" align="right" valign="top">Message:&nbsp;</td>
+                            <td><textarea class="retro" id="gbmsg" rows="3" cols="34" maxlength="240" placeholder="say something nice..."></textarea></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button class="submit" id="gbsubmit">&#9993; Sign It!</button>
+                                <span class="small">&nbsp;(saved in your browser)</span></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <hr class="fancy">
+
+        <h4>&#9656; Entries <span class="small">(newest first)</span></h4>
+        <div id="gbentries">
+            <!-- seeded + user entries get rendered here -->
+        </div>
+
+        <p style="text-align:center; margin-top:14px;">
+            <a href="index.html">&laquo; back to HQ</a> &nbsp;&middot;&nbsp;
+            <a href="links.html">cool links &raquo;</a>
+        </p>
+
+    </td>
+    </tr></tbody></table>
+
+    <div class="footer">
+        <div>
+            &copy; 2026 rdor &middot; thanks for signing &middot;
+            <a href="mailto:rpatdoria@gmail.com">webmaster@rdor.net</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+/* ---- the guestbook: a CGI script in spirit, localStorage in fact ---- */
+(function () {
+    "use strict";
+    var KEY = "rdor_guestbook";
+
+    /* the seed entries, as if signed long ago */
+    var seed = [
+        { name: "webmaster", site: "", when: "06.12.2026",
+          msg: "First! Welcome to the new rdor.net. Make yourself at home." },
+        { name: "vultr_fan_99", site: "",  when: "06.10.2026",
+          msg: "saw Metis at HackDavis, deserved that win. great demo!" },
+        { name: "scheduleBOB_user#4", site: "", when: "06.08.2026",
+          msg: "bob has saved my group project. cannot go back. <3" },
+        { name: "AnonCoder", site: "", when: "06.07.2026",
+          msg: "a site with NO react in 2026?? respect. bookmarked." }
+    ];
+
+    function esc(s) {
+        return String(s).replace(/[&<>\"]/g, function (c) {
+            return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+        });
+    }
+
+    function load() {
+        var saved;
+        try { saved = JSON.parse(localStorage.getItem(KEY) || "[]"); }
+        catch (e) { saved = []; }
+        return saved.concat(seed);   // user entries first, then seeds
+    }
+
+    function render() {
+        var list = load();
+        var html = "";
+        for (var i = 0; i < list.length; i++) {
+            var e = list[i];
+            var who = e.site
+                ? '<a href="' + esc(e.site) + '" rel="nofollow noopener">' + esc(e.name) + "</a>"
+                : esc(e.name);
+            html +=
+                '<div class="gbentry">' +
+                  '<div class="gbmeta">#' + (list.length - i) +
+                    ' &middot; <b>' + who + '</b> wrote on ' + esc(e.when) + ':</div>' +
+                  '<div class="gbtext">' + esc(e.msg) + "</div>" +
+                "</div>";
+        }
+        document.getElementById("gbentries").innerHTML = html;
+    }
+
+    function stamp() {
+        var d = new Date(), p = function (x) { return ("0" + x).slice(-2); };
+        return p(d.getMonth() + 1) + "." + p(d.getDate()) + "." + d.getFullYear();
+    }
+
+    document.getElementById("gbsubmit").addEventListener("click", function () {
+        var name = document.getElementById("gbname").value.trim() || "anonymous";
+        var site = document.getElementById("gbsite").value.trim();
+        var msg  = document.getElementById("gbmsg").value.trim();
+        if (!msg) { alert("c'mon, write something!"); return; }
+        if (site && !/^https?:\/\//i.test(site)) site = "http://" + site;
+
+        var saved;
+        try { saved = JSON.parse(localStorage.getItem(KEY) || "[]"); }
+        catch (e) { saved = []; }
+        saved.unshift({ name: name, site: site, msg: msg, when: stamp() });
+        localStorage.setItem(KEY, JSON.stringify(saved.slice(0, 50)));
+
+        document.getElementById("gbname").value = "";
+        document.getElementById("gbsite").value = "";
+        document.getElementById("gbmsg").value = "";
+        render();
+        alert("Thanks for signing! ♥");
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>
