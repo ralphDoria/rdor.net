@@ -43,9 +43,10 @@ body {
 }
 
 .about {
-    /* centered as a block, but text reads left-aligned within it */
-    width: fit-content;
-    max-width: 80ch;
+    /* centered as a block, but text reads left-aligned within it.
+       Fixed width (not fit-content) so the block doesn't start narrow and
+       jump wider while the boot animation reveals lines one by one. */
+    width: min(80ch, 100%);
     margin: 0 auto;
     text-align: left;
 }
@@ -161,4 +162,14 @@ body {
 
 .about a:hover {
     color: #33ccff;
+}
+
+/* boot animation: content starts hidden and is revealed by the script.
+   Only applies when JS is available (html.js), so the page still renders
+   fully without JavaScript. */
+.js #prompt-in,
+.js .logo,
+.js .about > p,
+.js #prompt-out {
+    display: none;
 }

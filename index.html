@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rdor</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        // marks that JS is available so CSS can hide content for the boot
+        // animation; without JS the page renders fully, no animation
+        document.documentElement.classList.add('js');
+    </script>
 </head>
 <body>
     <div class="pane-wrap">
         <div class="pane" id="pane">
-            <p class="prompt"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cmd">rdor --about</span></p>
+            <p class="prompt" id="prompt-in"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cmd" id="cmd">rdor --about</span></p>
             <pre class="logo">
  ________  ________  ___       ________  ___  ___
 |\   __  \|\   __  \|\  \     |\   __  \|\  \|\  \
@@ -46,12 +51,12 @@
                 <p>Lua, C, C++, & AI-assisted development</p>
                 <p>&nbsp;</p>
                 <p><span class="key">CURRENTLY</span></p>
-                <p>Summer '26 — SWE intern @ Google.</p>
+                <p>Summer '26 — exploring interests</p>
                 <p>&nbsp;</p>
                 <p><span class="key">CONTACT</span></p>
                 <p><a href="https://github.com/ralphDoria" target="_blank" rel="noopener noreferrer">github.com/ralphDoria</a> · rpdoria[at]ucdavis[dot]edu · <a href="https://www.linkedin.com/in/ralphdoria" target="_blank" rel="noopener noreferrer">linkedin.com/in/ralphdoria</a></p>
             </div>
-            <p class="prompt"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cursor"></span></p>
+            <p class="prompt" id="prompt-out"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cursor"></span></p>
         </div>
         <span class="copy-mode" id="copy-mode"></span>
     </div>
@@ -88,6 +93,46 @@
         pane.addEventListener('scroll', updateCopyMode);
         window.addEventListener('resize', updateCopyMode);
         updateCopyMode();
+
+        const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+        async function boot() {
+            const promptIn = document.getElementById('prompt-in');
+            const cmd = document.getElementById('cmd');
+            const logo = document.querySelector('.logo');
+            const aboutLines = document.querySelectorAll('.about > p');
+            const promptOut = document.getElementById('prompt-out');
+
+            const cmdText = cmd.textContent;
+            cmd.textContent = '';
+
+            // prompt is there from the start; the command types right away
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            promptIn.appendChild(cursor);
+            promptIn.style.display = 'block';
+            await sleep(250);
+
+            // the command gets typed out, keystrokes slightly uneven
+            for (const ch of cmdText) {
+                cmd.textContent += ch;
+                await sleep(20 + Math.random() * 35);
+            }
+            await sleep(300);
+
+            // enter: output flushes in quick bursts, line by line
+            cursor.remove();
+            logo.style.display = 'block';
+            await sleep(120);
+            for (const line of aboutLines) {
+                line.style.display = 'block';
+                await sleep(15 + Math.random() * 35);
+            }
+            await sleep(200);
+            promptOut.style.display = 'block';
+            updateCopyMode();
+        }
+        boot();
     </script>
 </body>
 </html>
