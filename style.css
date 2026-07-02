@@ -1,0 +1,164 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.3;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.pane-wrap {
+    position: relative;
+    flex: 1;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pane {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    /* tmux copy mode has no scrollbar; the [n/total] indicator shows position */
+    scrollbar-width: none;
+}
+
+.pane::-webkit-scrollbar {
+    display: none;
+}
+
+.copy-mode {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background: #fce94f;
+    color: black;
+    padding: 0 4px;
+    font-weight: bold;
+}
+
+.about {
+    /* centered as a block, but text reads left-aligned within it */
+    width: fit-content;
+    max-width: 80ch;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.about p {
+    margin: 2px 0;
+}
+
+.tmux {
+    flex-shrink: 0;
+    background: #4e9a06;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 2px 8px;
+}
+
+.tmux span {
+    white-space: nowrap;
+}
+
+.tmux-session {
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.tmux-window {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.tmux-active {
+    background: #8ae234;
+    padding: 0 4px;
+    flex-shrink: 0;
+}
+
+.tmux-right {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    min-width: 0;
+}
+
+.tmux-host {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+#tmux-clock {
+    flex-shrink: 0;
+}
+
+.prompt {
+    margin: 8px 0;
+}
+
+.dir {
+    color: #33ccff;
+    font-weight: bold;
+}
+
+.branch {
+    color: #ad7fa8;
+    font-weight: bold;
+}
+
+.arrow {
+    color: #8ae234;
+    font-weight: bold;
+}
+
+.cmd {
+    color: white;
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: white;
+    vertical-align: text-bottom;
+    animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.logo {
+    color: #33ccff;
+    margin: 0 auto;
+    /* center the art as a block, but keep its lines left-aligned so the art isn't distorted */
+    width: fit-content;
+    text-align: left;
+    /* widest art line is ~54ch; scale the font down so it always fits the viewport */
+    font-size: min(14px, calc((100vw - 40px) / 33));
+}
+
+.key {
+    color: #33ccff;
+    font-weight: bold;
+}
+
+.about a {
+    /* terminal-style links: inherit the text color, underline marks them clickable */
+    color: inherit;
+    text-decoration: underline;
+}
+
+.about a:hover {
+    color: #33ccff;
+}

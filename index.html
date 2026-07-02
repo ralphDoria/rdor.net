@@ -4,19 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rdor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>rdor</h1>
-    <h2>Summer '26</h2>
-    <h3>Manifesto</h3>
-    <p>AI/ML, DevOps, Neurotech, Product Management.</p>
-    <h3>Project Roadmap</h3>
-    <ol>
-    </ol>
-    <h3>Projects</h3>
-    <ol>
-        <li>ScheduleBob (6 users)</li>
-        <li>Metis (HackDavis) (Won MLH Best Use of Vultr)</li>
-    </ol>
+    <div class="pane-wrap">
+        <div class="pane" id="pane">
+            <p class="prompt"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cmd">rdor --about</span></p>
+            <pre class="logo">
+ ________  ________  ___       ________  ___  ___
+|\   __  \|\   __  \|\  \     |\   __  \|\  \|\  \
+\ \  \|\  \ \  \|\  \ \  \    \ \  \|\  \ \  \\\  \
+ \ \   _  _\ \   __  \ \  \    \ \   ____\ \   __  \
+  \ \  \\  \\ \  \ \  \ \  \____\ \  \___|\ \  \ \  \
+   \ \__\\ _\\ \__\ \__\ \_______\ \__\    \ \__\ \__\
+    \|__|\|__|\|__|\|__|\|_______|\|__|     \|__|\|__|
+
+ ________  ________  ________  ___  ________
+|\   ___ \|\   __  \|\   __  \|\  \|\   __  \
+\ \  \_|\ \ \  \|\  \ \  \|\  \ \  \ \  \|\  \
+ \ \  \ \\ \ \  \\\  \ \   _  _\ \  \ \   __  \
+  \ \  \_\\ \ \  \\\  \ \  \\  \\ \  \ \  \ \  \
+   \ \_______\ \_______\ \__\\ _\\ \__\ \__\ \__\
+    \|_______|\|_______|\|__|\|__|\|__|\|__|\|__|
+            </pre>
+            <div class="about">
+                <p>rdor v0.1.0 — Ralph Doria</p>
+                <p>&nbsp;</p>
+                <p><span class="key">ABOUT</span></p>
+                <p>Incoming 2nd year at UC Davis studying computer science. Currently interested in Neurotech, AI/ML, & YC Agentic vertical B2B SaaSes.</p>
+                <p>&nbsp;</p>
+                <p><span class="key">PROJECTS</span></p>
+                <p>ScheduleBob — Tool for UC Davis's course scheduling site for finding all possible course-section, saving time on finding a conflict-free schedule.</p>
+                <p>&nbsp;</p>
+                <p>Metis — Doomscrolling intervention via predicted neural insights on watched videos using TribeV2. Built at HackDavis; won MLH Best Use of Vultr.</p>
+                <p>&nbsp;</p>
+                <p>Wild Wasteland — WIP</p>
+                <p>&nbsp;</p>
+                <p>Bookbind — WIP</p>
+                <p>&nbsp;</p>
+                <p><span class="key">SKILLS</span></p>
+                <p>Lua, C, C++, & AI-assisted development</p>
+                <p>&nbsp;</p>
+                <p><span class="key">CURRENTLY</span></p>
+                <p>Summer '26 — SWE intern @ Google.</p>
+                <p>&nbsp;</p>
+                <p><span class="key">CONTACT</span></p>
+                <p><a href="https://github.com/ralphDoria" target="_blank" rel="noopener noreferrer">github.com/ralphDoria</a> · rpdoria[at]ucdavis[dot]edu · <a href="https://www.linkedin.com/in/ralphdoria" target="_blank" rel="noopener noreferrer">linkedin.com/in/ralphdoria</a></p>
+            </div>
+            <p class="prompt"><span class="dir">~/rdor.net</span> on <span class="branch">⎇ main</span> <span class="arrow">❯</span> <span class="cursor"></span></p>
+        </div>
+        <span class="copy-mode" id="copy-mode"></span>
+    </div>
+    <div class="tmux">
+        <span class="tmux-session">[rdor]</span>
+        <span class="tmux-window tmux-active">0:rdor*</span>
+        <span class="tmux-window">1:zsh</span>
+        <span class="tmux-right"><span class="tmux-host">"rdor.net"</span> <span id="tmux-clock"></span></span>
+    </div>
+    <script>
+        function tick() {
+            const now = new Date();
+            const time = now.toTimeString().slice(0, 5);
+            const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/ /g, '-');
+            document.getElementById('tmux-clock').textContent = time + ' ' + date;
+        }
+        tick();
+        setInterval(tick, 1000);
+
+        const pane = document.getElementById('pane');
+        const copyMode = document.getElementById('copy-mode');
+        function updateCopyMode() {
+            const lineHeight = parseFloat(getComputedStyle(pane).lineHeight);
+            const maxScroll = pane.scrollHeight - pane.clientHeight;
+            const fromBottom = Math.round((maxScroll - pane.scrollTop) / lineHeight);
+            const total = Math.round(maxScroll / lineHeight);
+            if (fromBottom > 0) {
+                copyMode.textContent = '[' + fromBottom + '/' + total + ']';
+                copyMode.style.display = 'block';
+            } else {
+                copyMode.style.display = 'none';
+            }
+        }
+        pane.addEventListener('scroll', updateCopyMode);
+        window.addEventListener('resize', updateCopyMode);
+        updateCopyMode();
+    </script>
 </body>
 </html>
