@@ -57,7 +57,8 @@ body {
 
 .tmux {
     flex-shrink: 0;
-    background: #4e9a06;
+    /* ANSI green as most terminals render tmux's default status bar */
+    background: #00cd00;
     color: black;
     display: flex;
     align-items: center;
@@ -81,7 +82,7 @@ body {
 }
 
 .tmux-active {
-    background: #8ae234;
+    background: #00ff00;
     padding: 0 4px;
     flex-shrink: 0;
 }
