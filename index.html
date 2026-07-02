@@ -33,7 +33,7 @@
     \|_______|\|_______|\|__|\|__|\|__|\|__|\|__|
             </pre>
             <div class="about">
-                <p>rdor v0.1.0 — Ralph Doria</p>
+                <p>rdor v0.19.0 — Ralph Doria</p>
                 <p>&nbsp;</p>
                 <p><span class="key">ABOUT</span></p>
                 <p>Incoming 2nd year at UC Davis studying computer science. Currently interested in Neurotech, AI/ML, & YC Agentic vertical B2B SaaSes.</p>
@@ -93,6 +93,9 @@
         pane.addEventListener('scroll', updateCopyMode);
         window.addEventListener('resize', updateCopyMode);
         updateCopyMode();
+
+        console.log('%c' + document.querySelector('.logo').textContent, 'color: #33ccff');
+        console.log('%crdor v0.19.0 — thanks for peeking. github.com/ralphDoria', 'color: #8ae234');
 
         const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

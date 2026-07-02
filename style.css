@@ -149,6 +149,26 @@ body {
     font-size: min(14px, calc((100vw - 40px) / 33));
 }
 
+/* RGB wave: the text is painted by a rainbow gradient that scrolls across it.
+   The gradient starts and ends on the same hue so the loop is seamless.
+   Gated behind @supports so unsupporting browsers keep the plain cyan. */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+    .logo {
+        background: linear-gradient(90deg, #ff3366, #ffcc33, #33ff66, #33ccff, #9933ff, #ff3366);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: rgb-wave 6s linear infinite;
+    }
+}
+
+@keyframes rgb-wave {
+    to {
+        background-position: 200% center;
+    }
+}
+
 .key {
     color: #33ccff;
     font-weight: bold;
